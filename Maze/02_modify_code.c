@@ -2,9 +2,17 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+struct cell{
+	int position_row = 0;
+	int position_column = 0;
+	int road = 0;
+	bool visited = 0;
+	struct cell *last;
+};
 
-
-
+void createMaze(){
+	maze =
+}
 
 bool atEnd = false;
 //Funcion para mover al jugador. Recibe el inicio del laberinto, el final, la posicion del jugador y adonde se mueve. Devuelve la direccion a moverse.

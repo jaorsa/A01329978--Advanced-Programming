@@ -12,6 +12,12 @@ typedef struct Players{
 	int pasos;
 } Player;
 
+typedef	struct Cells{
+	int posX;
+	int posY;
+	int visited;
+} Cell;
+
 /*				Función draw_maze
 *		Recibe posicion del jugador en X y en Y, el laberinto y las posiciones anteriores del jugador antes de moverse
 *		Imprime la posición del jugador en el laberinto
@@ -276,11 +282,15 @@ while(*(maze + 99) != 2){
 	scanf(" %c", &key);
 	player = player_movements(key, maze, player, 'p');
 }
-
 printf("el jugador tuvo %d\n", player.pasos);
 }
 
-
+Cell initcell(Cell cell){
+	cell.posX = 0;
+	cell.posY = 0;
+	cell.visited = 1;
+	return cell;
+}
 
 /*DEpth First Search Algorithm */
 /*
@@ -289,12 +299,14 @@ printf("el jugador tuvo %d\n", player.pasos);
 *	Down
 *	Left
 */
-void solveGame(int * maze, Player player){
+void solveGame(int * maze, Player player, Cell * stack){
 	int mov;
+	Cell initial;
+	//Create initialCell
+	initial = initcell(initial);
+*(stack + 0) = initial;
 	while(*(maze + 99) != 2){
-		if(	checkMovement(player.posX,player.posY, maze, 'u') == 0 ){
 
-		}
 
 	}
 
@@ -309,10 +321,23 @@ Player initPlayer(Player player){
 	return player;
 }
 
+char * readSize(char * size, FILE *fp){
+  fscanf(fp, "%[^\n]", size);
+  return size;
+ }
+
+char * readMaze(char * maze, FILE *fp){
+  while(  fgets(maze, 100, fp ) != NULL )
+    printf("%s\n", maze);
+  return maze;
+}
+
+
 //Initialize all parameters
 void main(){
-/*FILE *fp;
-char *size;
+FILE *fp;
+FILE *fpp;
+char *text;
 char *mace;
 
 if( (fp = fopen("maze.txt", "r")) == NULL ){
@@ -320,15 +345,15 @@ if( (fp = fopen("maze.txt", "r")) == NULL ){
 	exit(1);
 }
 
-size = readSize(size, fp);
-mace = readMaze(mace, fp);
-*/
+//size = readSize(size, fp);
+text = readMaze(text, fp);
 
 int *ptmz;
 ptmz = (int *) malloc(10 * 10 * sizeof(int));
 ptmz = create_maze(ptmz);
 //Create player
 Player player = initPlayer(player);
+Cell *stack;
 int opcion = 0;
 printf("Tienes dos opciones:\n Ingresa 1 si deseas jugar \n Ingresa 2 si deseas que el laberinto se resuelva solo\n");
 scanf(" %d", &opcion);
