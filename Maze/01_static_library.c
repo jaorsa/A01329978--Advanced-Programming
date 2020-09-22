@@ -8,24 +8,30 @@ char * readSize(char * size, FILE *fp){
  }
 
 char * readMaze(char * maze, FILE *fp){
-  while(  fgets(maze, 100, fp ) != NULL )
-    printf("%s\n", maze);
+  //int count = fread(maze, sizeof(char), 200, fp);
+  char c;
+  int i = 0;
+  while(fscanf(fp, "%c", &c) != EOF){
+    *(maze + i) = c;
+    printf("%c", c);
+    i++;
+  }
+
   return maze;
 }
 
 /*
 void main(){
+
   FILE *fp;
-  char size[N];
-  char maze[SIZE];
-  char **array;
-  //Stack stack;
-  //char n[N];
   if( (fp = fopen("maze.txt", "r")) == NULL ){
-    printf("File not found\n");
-    exit(1);
+  	printf("File not found\n");
+  	exit(1);
   }
-  array = readFile(size, maze, fp);
-  fclose(fp);
-  //return stack;
+
+  char *mace = (char *)malloc(100);
+  char *size = (char *)malloc(4);
+
+  size = readSize(size, fp);
+  mace = readMaze(mace, fp);
 }*/
