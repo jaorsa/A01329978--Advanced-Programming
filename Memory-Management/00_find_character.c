@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+/*
+  Difference between a program, a thread, a task, a job and a process?
+  
+*/
 size_t sizeArray = 0;
 
 //Find char in file
@@ -13,20 +16,22 @@ void findChar(FILE *ptr){
   printf("Type the character you wish to find\n");
   scanf("%c", &buscando);
 
+  //count the number of lines 
   while(fscanf(ptr, "%c", &tmp) != EOF){
+
+    
     sizeArray++;
     file = (char*)realloc(file, sizeArray * sizeof(char));
     if (tmp == buscando)
       accum++;
     *(file + sizeArray-1) = tmp;
+
+    
   }
-  printf("The content of the file says the following:\n" );
-  printf("%s\n", file);
   printf("The character '%c' was found %d times in the file\n", buscando, accum);
   free(file);
 
 }
-
 
 
 void main(){
