@@ -4,7 +4,7 @@
 
 void main(int argc, char *argv[]){
     for (size_t i = 0; i < argc-1; i++){argv[i] = argv[i+1]; }
-    if (execvp(argv[0],argv) < 0) {     /* execute the command  */
+    if (execvp(argv[0],argv) < 0) { 
         printf("*** ERROR: exec failed\n");
         exit(1);
     }

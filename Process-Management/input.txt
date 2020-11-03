@@ -1,0 +1,6 @@
+Let the given two files be file1.txt and file2.txt. The following are steps to merge. 
+1) Open file1.txt and file2.txt in read mode.
+2) Open file3.txt in write mode.
+3) Run a loop to one by one copy characters of file1.txt to file3.txt.
+4) Run a loop to one by one copy characters of file2.txt to file3.txt.
+5) Close all files.
