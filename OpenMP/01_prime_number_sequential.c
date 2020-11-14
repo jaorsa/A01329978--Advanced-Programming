@@ -1,20 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "omp.h"
+// #include "omp.h"
 #include <math.h>
-// #include <time.h>
+#include <time.h>
 
 void main(){
-    double final, inicio;
-    size_t flag = 1, range;
-    printf("Parallel: \n");
+    clock_t end, begin;
+    double final;
+    int flag = 1, range;
+    printf("Sequential: \n");
     
-    inicio=omp_get_wtime();
+    // inicio=omp_get_wtime();
     scanf("%d", &range);
-    #pragma omp for schedule(static)
-    for (size_t n = range; n > 0; n--)
+    begin = clock();
+    // #pragma omp for schedule(static)
+    for (int n = range; n > 0; n--)
     {
-        for (size_t i = 2; i <= sqrt(n); i++) 
+        for (int i = 2; i <= sqrt(n); i++) 
         { 
         // If n is divisible by any number between 
         // 2 and n/2, it is not prime 
@@ -26,8 +28,10 @@ void main(){
         }
         if(flag == 1){printf("%d is prime\n", n);}
         flag = 1;
+        if(n <= -1){break;}
     }
-    final = omp_get_wtime();
-    final -= inicio;   
+    // final = omp_get_wtime();
+    end = clock();
+    final = end - begin;   
     printf("time: %f\n", final);
 }
